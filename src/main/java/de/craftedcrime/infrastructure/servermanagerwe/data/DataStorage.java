@@ -1,4 +1,4 @@
-package de.ianfd.infrastructure.servermanagerwe.data;
+package de.craftedcrime.infrastructure.servermanagerwe.data;
 /*
  * Created by ian on 18.03.21
  * Location: de.ianfd.infrastructure.servermanagerwe.data
@@ -7,12 +7,14 @@ package de.ianfd.infrastructure.servermanagerwe.data;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import de.ianfd.infrastructure.servermanagerwe.model.ConfigEdit;
-import de.ianfd.infrastructure.servermanagerwe.model.ConfigUpload;
-import de.ianfd.infrastructure.servermanagerwe.model.KeySecretPair;
+import de.craftedcrime.infrastructure.servermanagerwe.model.ConfigEdit;
+import de.craftedcrime.infrastructure.servermanagerwe.model.ConfigUpload;
+import de.craftedcrime.infrastructure.servermanagerwe.model.KeySecretPair;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class DataStorage {
 
     private Cache<String, String> keyToSecretCache = CacheBuilder.newBuilder()
@@ -63,6 +65,10 @@ public class DataStorage {
      */
     public void removeKeyAndSecret(String key) {
         keyToSecretCache.invalidate(key);
+    }
+
+    public String getSecretToKey(String key) {
+        return keyToSecretCache.getIfPresent(key);
     }
 
     /**
@@ -138,6 +144,10 @@ public class DataStorage {
      */
     public void removeEdit(String key) {
         configEditCache.invalidate(key);
+    }
+
+    public ConfigEdit getConfigEdit(String key) {
+        return configEditCache.getIfPresent(key);
     }
 
 }

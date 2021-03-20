@@ -1,4 +1,4 @@
-package de.ianfd.infrastructure.servermanagerwe.model;
+package de.craftedcrime.infrastructure.servermanagerwe.model;
 /*
  * Created by ian on 19.03.21
  * Location: de.ianfd.infrastructure.servermanagerwe.model
