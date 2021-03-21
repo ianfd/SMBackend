@@ -1,7 +1,7 @@
 package de.craftedcrime.infrastructure.servermanagerwe.service;
 /*
  * Created by ian on 19.03.21
- * Location: de.ianfd.infrastructure.servermanagerwe.service
+ * Location: de.craftedcrime.infrastructure.servermanagerwe.service
  * Created for the project servermanagerwe with the name SecurityService
  */
 

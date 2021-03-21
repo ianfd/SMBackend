@@ -1,18 +1,16 @@
 package de.craftedcrime.infrastructure.servermanagerwe.controller;
 
+import de.craftedcrime.infrastructure.servermanagerwe.model.ConfigEdit;
 import de.craftedcrime.infrastructure.servermanagerwe.service.ConfigEditService;
 import de.craftedcrime.infrastructure.servermanagerwe.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /*
  * Created by ian on 19.03.21
- * Location: de.ianfd.infrastructure.servermanagerwe.controller
+ * Location: de.craftedcrime.infrastructure.servermanagerwe.controller
  * Created for the project servermanagerwe with the name DownloadConfigController
  */
 @RestController
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DownloadConfigController {
 
     private SecurityService securityService;
-
     private ConfigEditService configEditService;
 
     @Autowired
@@ -38,6 +35,20 @@ public class DownloadConfigController {
                 } else {
                     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
                 }
+            } else {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<?> saveEdit(@RequestParam("key") String key, @RequestParam("secret") String secret, @RequestBody ConfigEdit configEdit) {
+        if ((key != null) && (secret != null) && (configEdit != null)) {
+            if (securityService.validKeyAndSecret(key, secret)) {
+                configEditService.saveConfig(key, configEdit);
+                return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
