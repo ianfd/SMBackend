@@ -24,4 +24,8 @@ public class ConfigUploadService {
         dataStorage.addUpload(key, configUpload);
     }
 
+    public ConfigUpload getConfigUpload(String key) {
+        return dataStorage.getConfigUpload(key);
+    }
+
 }

@@ -8,9 +8,9 @@
         <version>2.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>de.ianfd.infrastructure</groupId>
+    <groupId>de.craftedcrime.infrastructure.servermanager</groupId>
     <artifactId>servermanagerwe</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>servermanagerwe</name>
     <description>WebEditor for servermanager</description>
     <properties>

@@ -9,37 +9,37 @@ import java.util.List;
 
 public class ConfigEdit {
 
-    private List<ServerEdit> serverEdits;
-    private String bungeeMODT;
-    private int bungeeMaxServerSlots;
+    private List<ServerEdit> editList;
+    private String motdBungee;
+    private int maxPlayerBungee;
 
-    public ConfigEdit(List<ServerEdit> serverEdits, String bungeeMODT, int bungeeMaxServerSlots) {
-        this.serverEdits = serverEdits;
-        this.bungeeMODT = bungeeMODT;
-        this.bungeeMaxServerSlots = bungeeMaxServerSlots;
+    public ConfigEdit(List<ServerEdit> editList, String motdBungee, int maxPlayerBungee) {
+        this.editList = editList;
+        this.motdBungee = motdBungee;
+        this.maxPlayerBungee = maxPlayerBungee;
     }
 
-    public List<ServerEdit> getServerEdits() {
-        return serverEdits;
+    public List<ServerEdit> getEditList() {
+        return editList;
     }
 
-    public void setServerEdits(List<ServerEdit> serverEdits) {
-        this.serverEdits = serverEdits;
+    public void setEditList(List<ServerEdit> editList) {
+        this.editList = editList;
     }
 
-    public String getBungeeMODT() {
-        return bungeeMODT;
+    public String getMotdBungee() {
+        return motdBungee;
     }
 
-    public void setBungeeMODT(String bungeeMODT) {
-        this.bungeeMODT = bungeeMODT;
+    public void setMotdBungee(String motdBungee) {
+        this.motdBungee = motdBungee;
     }
 
-    public int getBungeeMaxServerSlots() {
-        return bungeeMaxServerSlots;
+    public int getMaxPlayerBungee() {
+        return maxPlayerBungee;
     }
 
-    public void setBungeeMaxServerSlots(int bungeeMaxServerSlots) {
-        this.bungeeMaxServerSlots = bungeeMaxServerSlots;
+    public void setMaxPlayerBungee(int maxPlayerBungee) {
+        this.maxPlayerBungee = maxPlayerBungee;
     }
 }

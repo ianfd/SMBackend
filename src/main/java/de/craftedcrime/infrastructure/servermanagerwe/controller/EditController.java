@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * Created by ian on 19.03.21
  * Location: de.craftedcrime.infrastructure.servermanagerwe.controller
@@ -15,15 +18,17 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/edit")
-public class DownloadConfigController {
+public class EditController {
 
-    private SecurityService securityService;
-    private ConfigEditService configEditService;
+    private final SecurityService securityService;
+    private final ConfigEditService configEditService;
+    private final Logger logger;
 
     @Autowired
-    public DownloadConfigController(SecurityService securityService, ConfigEditService configEditService) {
+    public EditController(SecurityService securityService, ConfigEditService configEditService) {
         this.securityService = securityService;
         this.configEditService = configEditService;
+        this.logger = Logger.getLogger("DOWNLOADER");
     }
 
     @GetMapping("/get")
@@ -36,10 +41,10 @@ public class DownloadConfigController {
                     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
                 }
             } else {
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
@@ -48,12 +53,30 @@ public class DownloadConfigController {
         if ((key != null) && (secret != null) && (configEdit != null)) {
             if (securityService.validKeyAndSecret(key, secret)) {
                 configEditService.saveConfig(key, configEdit);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(42, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @GetMapping("/getserver")
+    public ResponseEntity<?> downloadServerEdits(@RequestParam("key") String key, @RequestParam("secret") String secret) {
+        logger.log(Level.INFO, "Starting download of edit.");
+        if ((key != null) && (secret != null)) {
+            logger.log(Level.INFO, "Key and secret aren't null.");
+            if (securityService.validKeyAndSecret(key, secret)) {
+                logger.log(Level.INFO, "Key and secret are validated.");
+                ConfigEdit configEdit = configEditService.getConfigEdit(key);
+                securityService.resetCredentials(key);
+                return new ResponseEntity<>(configEdit, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 

@@ -36,4 +36,8 @@ public class SecurityService {
 
         return dataStorage.insertKeyAndSecret(key, secret);
     }
+
+    public void resetCredentials(String key) {
+        dataStorage.removeEverything(key);
+    }
 }

@@ -22,6 +22,7 @@ public class ConfigEditService {
 
 
     public ConfigEdit getConfigEdit(String key) {
+        System.out.println("Downloadign credentials");
         return dataStorage.getConfigEdit(key);
     }
 

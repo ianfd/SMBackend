@@ -9,10 +9,12 @@ public class ServerEdit {
 
     private EditAction editAction;
     private ServerObject serverObject;
+    private boolean isLobby;
 
-    public ServerEdit(EditAction editAction, ServerObject serverObject) {
+    public ServerEdit(EditAction editAction, ServerObject serverObject, boolean isLobby) {
         this.editAction = editAction;
         this.serverObject = serverObject;
+        this.isLobby = isLobby;
     }
 
     public EditAction getEditAction() {
@@ -29,5 +31,13 @@ public class ServerEdit {
 
     public void setServerObject(ServerObject serverObject) {
         this.serverObject = serverObject;
+    }
+
+    public boolean isLobby() {
+        return isLobby;
+    }
+
+    public void setLobby(boolean lobby) {
+        isLobby = lobby;
     }
 }

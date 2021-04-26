@@ -7,80 +7,81 @@ package de.craftedcrime.infrastructure.servermanagerwe.model;
 
 public class ServerObject {
 
-        private int server_id;
-        private String serverName;
-        private String ipAddress;
-        private int port;
-        private String accessType;
-        private int maxPlayers;
-        private boolean active;
+    private int serverId;
+    private String serverName;
+    private String ipAddress;
+    private int port;
+    private String accessType;
+    private int maxPlayers;
+    private boolean active;
 
-        public ServerObject(int server_id, String serverName, String ipAddress, int port, String accessType, int maxPlayers) {
-            this.server_id = server_id;
-            this.serverName = serverName;
-            this.ipAddress = ipAddress;
-            this.port = port;
-            this.accessType = accessType;
-            this.maxPlayers = maxPlayers;
-        }
+    public ServerObject(int serverId, String serverName, String ipAddress, int port, String accessType, int maxPlayers, boolean active) {
+        this.serverId = serverId;
+        this.serverName = serverName;
+        this.ipAddress = ipAddress;
+        this.port = port;
+        this.accessType = accessType;
+        this.maxPlayers = maxPlayers;
+        this.active = active;
+    }
 
-        public ServerObject() {
-        }
+    public ServerObject() {
+    }
 
-        public int getServer_id() {
-            return server_id;
-        }
+    public int getServerId() {
+        return serverId;
+    }
 
-        public void setServer_id(int server_id) {
-            this.server_id = server_id;
-        }
+    public void setServerId(int serverId) {
+        this.serverId = serverId;
+    }
 
-        public String getServerName() {
-            return serverName;
-        }
+    public String getServerName() {
+        return serverName;
+    }
 
-        public void setServerName(String serverName) {
-            this.serverName = serverName;
-        }
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
 
-        public String getIpAddress() {
-            return ipAddress;
-        }
+    public String getIpAddress() {
+        return ipAddress;
+    }
 
-        public void setIpAddress(String ipAddress) {
-            this.ipAddress = ipAddress;
-        }
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
 
-        public int getPort() {
-            return port;
-        }
+    public int getPort() {
+        return port;
+    }
 
-        public void setPort(int port) {
-            this.port = port;
-        }
+    public void setPort(int port) {
+        this.port = port;
+    }
 
-        public String getAccessType() {
-            return accessType;
-        }
+    public String getAccessType() {
+        return accessType;
+    }
 
-        public void setAccessType(String accessType) {
-            this.accessType = accessType;
-        }
+    public void setAccessType(String accessType) {
+        this.accessType = accessType;
+    }
 
-        public boolean isActive() {
-            return active;
-        }
+    public boolean isActive() {
+        return active;
+    }
 
-        public void setActive(boolean active) {
-            this.active = active;
-        }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-        public int getMaxPlayers() {
-            return maxPlayers;
-        }
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
 
-        public void setMaxPlayers(int maxPlayers) {
-            this.maxPlayers = maxPlayers;
-        }
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
+    }
 
 }

@@ -10,8 +10,12 @@ import com.google.common.cache.CacheBuilder;
 import de.craftedcrime.infrastructure.servermanagerwe.model.ConfigEdit;
 import de.craftedcrime.infrastructure.servermanagerwe.model.ConfigUpload;
 import de.craftedcrime.infrastructure.servermanagerwe.model.KeySecretPair;
+import de.craftedcrime.infrastructure.servermanagerwe.model.ServerObject;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -114,6 +118,10 @@ public class DataStorage {
         configUploadCache.invalidate(key);
     }
 
+    public ConfigUpload getConfigUpload(String key) {
+        return configUploadCache.getIfPresent(key);
+    }
+
     /**
      * checks if an edit with the key exists
      *
@@ -149,5 +157,21 @@ public class DataStorage {
     public ConfigEdit getConfigEdit(String key) {
         return configEditCache.getIfPresent(key);
     }
+
+    @PostConstruct
+    public void init() {
+        insertKeyAndSecret("asd", "asd");
+        HashMap<String, ServerObject> lol = new HashMap<>();
+        lol.put("lobby1", new ServerObject(1, "lobby1", "10.10.5.4", 25565, "all", 100, true));
+        lol.put("lobby2", new ServerObject(2, "lobby2", "10.10.5.6", 25565, "elite", 5, false));
+        lol.put("lobby3", new ServerObject(3, "lobby3", "10.10.5.7", 25565, "vip", 6, true));
+        HashMap<String, ServerObject> norm = new HashMap<>();
+        norm.put("survival1", new ServerObject(5, "survival1", "10.10.2.5", 25565, "vip", 25, true));
+        norm.put("survival2", new ServerObject(9, "survival2", "10.10.4.5", 25565, "elite", 25, true));
+        norm.put("survival3", new ServerObject(12, "survival3", "10.10.7.5", 25565, "yt", 125, true));
+        addUpload("asd", new ConfigUpload("lol", 100, lol, norm));
+        addEdit("asd", new ConfigEdit(new ArrayList<>(), "lol", 100));
+    }
+
 
 }
